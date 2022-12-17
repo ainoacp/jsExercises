@@ -9,8 +9,6 @@ let eventInput = function(event) {
 }
 document.getElementsById('eventInput').addEventListener("input", eventInput);
 console.log('esto es un evento input', eventInput);*/
-
-let valueInput = document.body.querySelector(".focusInput");
-valueInput.addEventListener("input", function (event) {
-  console.log(event);
-});
+const muestraValor = (event) => console.log(event);
+const valueInput = document.body.querySelector(".focusInput");
+valueInput.addEventListener('input', () => muestraValor (focusInput.value));
