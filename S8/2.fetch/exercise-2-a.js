@@ -18,5 +18,17 @@ la api, el valor del input.
 </html>
 */
 
-const baseUrl = 'https://api.nationalize.io?name=';
+const search = (event) => {
+    const input$$ = document.querySelector ('input');
 
+    fetch("https://api.nationalize.io" + '?name=' + input$$.value)
+      .then((response) => {
+        return response.json();
+      })
+      .then((myJson) => {
+        console.log(myJson);
+      });
+};
+
+const btnSearch$$ = document.querySelector('button');
+btnSearch$$.addEventListener('click', search);

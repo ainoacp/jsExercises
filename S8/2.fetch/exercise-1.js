@@ -8,13 +8,16 @@ que crees un .html y un .js.*/
 
 
 const search = (event) => {
-    const div$$ = document.querySelector ('div');
+    const input$$ = document.querySelector ('input');
 
-fetch('https://api.agify.io?name=michael')
-  .then((response) => {
-    return response.json();
-  })
-  .then((myJson) => {
-    console.log(myJson);
-  });
-}
+    fetch('https://api.agify.io?name=michael')
+      .then((response) => {
+        return response.json();
+      })
+      .then((myJson) => {
+        console.log(myJson);
+      });
+};
+
+const btnSearch$$ = document.querySelector('button');
+btnSearch$$.addEventListener('click', search);
