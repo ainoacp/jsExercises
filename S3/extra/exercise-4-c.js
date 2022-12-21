@@ -38,4 +38,6 @@ const countries = [
             countryList.remove();
         });
         document.body.appendChild(countryList);
-    }
+        console.log(countryList);
+    };
+    

@@ -11,17 +11,18 @@ const countries = [
     {title: 'Random title', imgUrl: 'https://picsum.photos/300/200?random=5'}];
 
 
-/*for (let i = 0; i < countries.lenght; i++) {
+for (let i = 0; i < countries.length; i++) {
     const country = countries[i];
+    let countryList = document.createElement("div");
+    countryList.innerHTML = `<h4>${country.title}</h4><img src=${country.imgUrl} />`;
+    document.body.appendChild(countryList); 
+    console.log(countryList);
+};
+
+
+/*for (const country of countries) {
     let countryList = document.createElement("div");
     countryList.innerHTML = `<h4>${country.title}</h4><img src=${country.imgUrl} />`;
     document.body.appendChild(countryList);
     console.log(countryList);
 }*/
-//PQ NO SALE CON FOR???
-
-for (const country of countries) {
-    let countryList = document.createElement("div");
-    countryList.innerHTML = `<h4>${country.title}</h4><img src=${country.imgUrl} />`;
-    document.body.appendChild(countryList);
-}
