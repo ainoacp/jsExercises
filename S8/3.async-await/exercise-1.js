@@ -8,7 +8,7 @@ const runTimeOut = () => {
         }, 2000);
     })
 
-    promise.then(() => {console.log('Time out!')})
+    console.log('Time out!')
 };
 
 runTimeOut();
