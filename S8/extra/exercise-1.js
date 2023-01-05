@@ -1,8 +1,34 @@
-/*En base a la api de Breaking Bad (https://breakingbadapi.com/), 
-vamos a desarrollar una página dinámicamente en la que visualizar 
-una galería con las imagenes y los nombres de los personajes de 
-la serie. Para ellos es necesario usar el endpoint 
-'https://breakingbadapi.com/api/characters'.
+const getDigimon = async () => {
+  const request = await fetch('https://digimon-api.vercel.app/api/digimon');
+  const response = await request.json();
+  return response;
+};
 
-Si te fijas en la respuesta de la api, la imagen está en la 
-propiedad 'img' y el título en la propiedad 'name'.*/
+const printDigimons = (digimons) => {
+    const contentDiv = document.querySelector('.content');
+    contentDiv.innerHTML = '';
+    
+    digimons?.forEach(digimon => {
+        const card = document.createElement('div');
+        card.className = 'card';
+       
+        const cardContent = `
+          <img src="${digimon.img}" class='card-img'/>
+          <div class="card-body">
+            <h5 class="card-title">${digimon.name}</h5>
+          </div>`; 
+        
+        card.innerHTML = cardContent;
+
+        contentDiv.appendChild(card);
+    });  
+};
+
+const init = async () => {
+    const list = await getDigimon();
+    console.log(list);
+    printDigimons(list);
+    console.log(list);
+  };
+  
+init();

@@ -1,13 +1,52 @@
-/*En base a la api Open Trivia (https://opentdb.com/api_config.php), 
-vamos a desarrollar un trivial con la siguiente url 
-'https://opentdb.com/api.php?amount=10&type=multiple'. Esta api nos 
-devolverá una serie de preguntas con sus respuestas, tanto erroneas 
-como correctas. 
+const getQuestions = async () => {
+    const request = await fetch('https://opentdb.com/api.php?amount=10&type=multiple');
+    const response = await request.json();
+    return response;
+    console.log(response);
+};
 
-La idea es hacer un juego en el que el usuario introduzca en un input 
-las caracteristicas del Trivial y que al darle al 'Start Game' le salgan 
-las preguntas de la api para que pueda comenzar el juego. Una vez las 
-responda todas, le mostraremos al usuario el resultado.
+const printTrivial = (questions) => {
+    const contentDiv = document.querySelector('[data-function="gameboard"]');
+    contentDiv.innerHTML = '';
 
-Ten en cuenta que hay dos tipos de preguntas. Aquellas con 3 respuestas 
-erroneas y 1 correcta y aquellas con respuesta verdadero / falso.*/
+    questions?.forEach(question => {
+    
+        const questionContent = `
+        <div class="questionContent">
+          <h5 class="question">${question.question}</h5>
+          <div class="answers">
+            <input type="checkbox" class="correct">${question.correct_answer}
+            <input type="checkbox" class="incorret">${question.incorrect_answers[0]}
+            <input type="checkbox" class="incorret">${question.incorrect_answers[1]}
+            <input type="checkbox" class="incorret">${question.incorrect_answers[2]}
+          </div>
+        </div>`; 
+      
+    contentDiv.innerHTML = questionContent;
+  });  
+};
+
+const choosedCorrect = (questions) => {
+    let yourScore = 0;
+
+    questions.forEach(question => {
+        const answers = [...question.correct_answer, question.incorrect_answers];
+        if (question.answers === question.correct_answer) {
+            yourScore++;
+        }
+    });
+    alert('your score is: ' + yourScore);
+};
+
+const init = async () => {
+    const list = await getQuestions();
+    console.log(list);
+    
+    const startGame = document.querySelector('[data-function="start-game"]');
+    startGame.addEventListener('click', () => printTrivial(list.results));
+
+    const checkGame = document.querySelector('[data-function="check-game"]');
+    checkGame.addEventListener('click', () => choosedCorrect(list.results));
+};
+
+init();
